@@ -1,0 +1,34 @@
+<idea-plugin>
+    <id>align-carets</id>
+    <name>align-carets</name>
+    <version>1.0.0</version>
+    <vendor email="chris.ch.cheung@gmail.com">Chris Cheung</vendor>
+
+    <description><![CDATA[
+      this plugin can align carets in a column for you~
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Release 1.0.0: fix action name and group, try to move carets after insert space
+      Release 0.0.1: Initial release.<br>
+      Implemented basic the function.
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="162"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij"/>
+
+    <actions>
+        <action id="aligncarets.AlignAction" class="aligncarets.AlignAction" text="Align Carets"
+                description="Align multiple carets to the right most caret by inserting spaces">
+            <add-to-group group-id="EditSmartGroup" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl BACK_SLASH"/>
+        </action>
+    </actions>
+</idea-plugin>
