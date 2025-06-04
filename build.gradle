@@ -17,8 +17,8 @@ intellij {
     pluginName 'align-carets'
     intellij.updateSinceUntilBuild false //Disables updating since-build attribute in plugin.xml
     publishPlugin {
-        username 'dipucian'
-        password 'Littleau81'
+        username System.getenv('PLUGIN_USERNAME')
+        password System.getenv('PLUGIN_PASSWORD')
     }
 }
 
