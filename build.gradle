@@ -1,36 +1,35 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
-
 plugins {
-    id "org.jetbrains.intellij" version "0.3.1"
+    id 'java'
+    id 'org.jetbrains.intellij' version '1.17.4'
 }
 
-apply plugin: 'idea'
-apply plugin: 'org.jetbrains.intellij'
-apply plugin: 'java'
-
-intellij {
-    version 'IC-2016.3' //IntelliJ IDEA 2016.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
-    pluginName 'align-carets'
-    intellij.updateSinceUntilBuild false //Disables updating since-build attribute in plugin.xml
-    publishPlugin {
-        username System.getenv('PLUGIN_USERNAME')
-        password System.getenv('PLUGIN_PASSWORD')
-    }
-}
-
-sourceCompatibility = 1.8
+group = 'align-carets'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
-group 'align-carets'
-version '1.0.0'
+intellij {
+    version.set('2024.1')
+    pluginName.set('align-carets')
+    updateSinceUntilBuild.set(false)
+}
+
+patchPluginXml {
+    sinceBuild.set('241')
+}
+
+publishPlugin {
+    token.set(System.getenv('PUBLISH_TOKEN'))
+}
+
+test {
+    useJUnitPlatform()
+}
+
