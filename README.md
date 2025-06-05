@@ -11,10 +11,7 @@ that increments the plugin version. The workflow accepts a `patch`, `minor` or
 
 ### Publishing
 
-The Gradle build uses the `publishPlugin` task. Authentication details are
-read from the environment variable `PUBLISH_TOKEN`. In GitHub Actions add this
-secret so the publish workflow can deploy the plugin once a version bump PR is
-merged.
+To publish the plugin, run `./gradlew publishPlugin` with the `PUBLISH_TOKEN` environment variable set to a JetBrains Marketplace token. In GitHub Actions, add this variable as a repository secret so that it is available during the publish step.
 
 ### Gradle wrapper
 
