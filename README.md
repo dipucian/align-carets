@@ -5,10 +5,7 @@ it works by inserting spaces to match the right most caret
 
 ### Publishing
 
-The Gradle build uses the `publishPlugin` task. Authentication details are
-read from the environment variables `PLUGIN_USERNAME` and `PLUGIN_PASSWORD`.
-In GitHub Actions, add these as repository secrets and they will be available
-when the plugin is published.
+To publish the plugin, run `./gradlew publishPlugin` with the `PUBLISH_TOKEN` environment variable set to a JetBrains Marketplace token. In GitHub Actions, add this variable as a repository secret so that it is available during the publish step.
 
 ### Gradle wrapper
 
