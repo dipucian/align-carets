@@ -16,13 +16,13 @@ java {
 }
 
 intellij {
-    version.set('2024.1')
+    version.set('2022.3')
     pluginName.set('align-carets')
     updateSinceUntilBuild.set(false)
 }
 
 patchPluginXml {
-    sinceBuild.set('241')
+    sinceBuild.set('223')
 }
 
 publishPlugin {
