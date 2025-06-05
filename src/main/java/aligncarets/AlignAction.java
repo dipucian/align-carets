@@ -3,6 +3,7 @@ package aligncarets;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Document;
@@ -18,6 +19,13 @@ public class AlignAction extends AnAction {
         Project project = e.getProject();
         Editor editor = e.getData(CommonDataKeys.EDITOR);
         e.getPresentation().setVisible(project != null && editor != null && editor.getCaretModel().getCaretCount() > 1);
+    }
+
+    @Override
+    public ActionUpdateThread getActionUpdateThread() {
+        // The update method only queries editor state, which is inexpensive, so
+        // it can safely run on a background thread.
+        return ActionUpdateThread.BGT;
     }
 
     @Override

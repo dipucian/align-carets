@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>align-carets</id>
     <name>align-carets</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <vendor email="chris.ch.cheung@gmail.com">Chris Cheung</vendor>
 
     <description><![CDATA[
