@@ -10,7 +10,6 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class AlignAction extends AnAction {
@@ -41,18 +40,9 @@ public class AlignAction extends AnAction {
                     continue;
                 }
                 int offset = caret.getOffset();
-                document.insertString(offset, repeat(' ', pad));
+                document.insertString(offset, " ".repeat(pad));
                 caret.moveToOffset(offset + pad);
             }
         });
-    }
-
-    private String repeat(char ch, int times) {
-        if (times <= 0) {
-            return "";
-        }
-        char[] arr = new char[times];
-        Arrays.fill(arr, ch);
-        return new String(arr);
     }
 }
