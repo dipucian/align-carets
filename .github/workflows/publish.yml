@@ -1,0 +1,25 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Generate wrapper jar
+        run: gradle wrapper --gradle-version 8.14 --distribution-type bin
+      - name: Build plugin
+        run: ./gradlew buildPlugin --no-daemon
+      - name: Publish plugin
+        run: ./gradlew publishPlugin --no-daemon
+        env:
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
