@@ -1,0 +1,61 @@
+name: Bump Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      level:
+        description: "Version part to increment"
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Generate wrapper jar
+        run: gradle wrapper --gradle-version 8.14 --distribution-type bin
+
+      - name: Bump version
+        run: ./scripts/bump-version.sh ${{ github.event.inputs.level }}
+
+      - name: Get new version
+        id: version
+        run: |
+          new=$(grep "^version =" build.gradle | sed -E "s/.*'(.*)'/\1/")
+          echo "version=$new" >> "$GITHUB_OUTPUT"
+
+      - name: Collect commit titles
+        id: titles
+        run: |
+          last=$(git log -1 --format=%H -- build.gradle)
+          log=$(git log --format='%s' ${last}..HEAD | sed 's/^/- /')
+          echo "log<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$log" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: |
+            chore: bump version to ${{ steps.version.outputs.version }}
+            
+            ${{ steps.titles.outputs.log }}
+          title: "Bump version to ${{ steps.version.outputs.version }}"
+          body: |
+            Bumps the plugin version to `${{ steps.version.outputs.version }}`.
+
+            ## Changes since last release
+            ${{ steps.titles.outputs.log }}
