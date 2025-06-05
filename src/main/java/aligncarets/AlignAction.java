@@ -29,6 +29,9 @@ public class AlignAction extends AnAction {
         WriteCommandAction.runWriteCommandAction(e.getProject(), () -> {
             for (Caret caret : carets) {
                 int pad = maxColumn - caret.getLogicalPosition().column;
+                if (pad <= 0) {
+                    continue;
+                }
                 int offset = caret.getOffset();
                 document.insertString(offset, repeat(' ', pad));
                 caret.moveToOffset(offset + pad);
@@ -37,6 +40,9 @@ public class AlignAction extends AnAction {
     }
 
     private String repeat(char ch, int times) {
+        if (times <= 0) {
+            return "";
+        }
         char[] arr = new char[times];
         Arrays.fill(arr, ch);
         return new String(arr);
