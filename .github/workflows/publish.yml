@@ -15,8 +15,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: Generate wrapper jar
-        run: gradle wrapper --gradle-version 8.14 --distribution-type bin
       - name: Build plugin
         run: ./gradlew buildPlugin --no-daemon
       - name: Publish plugin

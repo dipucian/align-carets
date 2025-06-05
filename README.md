@@ -13,17 +13,6 @@ that increments the plugin version. The workflow accepts a `patch`, `minor` or
 
 To publish the plugin, run `./gradlew publishPlugin` with the `PUBLISH_TOKEN` environment variable set to a JetBrains Marketplace token. In GitHub Actions, add this variable as a repository secret so that it is available during the publish step.
 
-### Gradle wrapper
-
-This repository does not include the `gradle-wrapper.jar` file. To generate it,
-run:
-
-```bash
-gradle wrapper --gradle-version 8.14 --distribution-type bin
-```
-
-This command downloads the required wrapper files so `./gradlew` works.
-
 ### Local installation
 
 After building the project with `./gradlew buildPlugin`, the plugin archive is
