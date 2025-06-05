@@ -2,10 +2,6 @@
 
 This repository uses Gradle for builds. Helpful commands:
 
-- Generate the wrapper JAR if it is missing:
-  ```bash
-  gradle wrapper --gradle-version 8.14 --distribution-type bin
-  ```
 - Run tests:
   ```bash
   ./gradlew test --no-daemon
