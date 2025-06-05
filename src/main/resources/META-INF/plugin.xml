@@ -9,6 +9,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
+      Release 1.0.1: fix negative pad bug and update ActionUpdateThread
       Release 1.0.0: fix action name and group, try to move carets after insert space
       Release 0.0.1: Initial release.<br>
       Implemented basic the function.
