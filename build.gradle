@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'align-carets'
-version = '1.0.2'
+version = '1.0.3'
 
 repositories {
     mavenCentral()
